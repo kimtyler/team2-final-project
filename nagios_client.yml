@@ -1,0 +1,13 @@
+---
+- name: use nagios_client role
+  hosts: all:!prdx-nagios201
+  remote_user: ansible
+  become_method: sudo
+  become: yes
+  roles:
+  - nagios_client
+ 
+
+
+
+

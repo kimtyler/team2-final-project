@@ -1,0 +1,30 @@
+---
+- name: use nameserver for dns role
+  hosts: nameserver
+  remote_user: ansible
+  become_method: sudo
+  become: yes
+
+- name: use dns-master role
+  hosts: 192.168.36.13
+  remote_user: ansible
+  become_method: sudo
+  become: yes
+  roles: 
+  - dns-master
+
+- name: use dns-slave1 role
+  hosts: 192.168.36.14
+  remote_user: ansible
+  become_method: sudo
+  become: yes
+  roles: 
+  - dns-slave1
+
+- name: use dns-slave2 role
+  hosts: 192.168.36.15
+  remote_user: ansible
+  become_method: sudo
+  become: yes
+  roles:
+  - dns-slave2  

@@ -1,0 +1,13 @@
+---
+samba_share_mounts:
+ - path_secure: /sambashare/secure
+   path_open: /sambashare/open
+
+samba_users:
+  - username: admin
+    name: Samba User
+    password: "{{ 'password' | password_hash('sha256', 'mysecretsalt') }}"
+    smbpasswd: password
+
+samba_path_open: /sambashare/open
+samba_path_secure: /sambashare/secure

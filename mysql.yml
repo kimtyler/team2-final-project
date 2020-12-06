@@ -1,0 +1,8 @@
+---
+- name: Set up mysql
+  hosts: data_server
+  user: ansible
+  become: yes
+
+  roles:
+  - geerlingguy.mysql

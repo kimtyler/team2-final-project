@@ -1,0 +1,33 @@
+---
+#- name: Install webservers6 packages
+#  hosts: web_six:web_server
+#  remote_user: ansible
+#  become: yes
+
+- name: Install webservers packages
+  yum:
+    name: httpd
+    state: latest
+  
+- name: copy index6.html
+  copy:
+    src: /ansible/role/webservers/templates/index6.html.j2
+    dest: /var/www/html/index.html/
+    owner: root
+    group: root
+    mode: '0666'
+
+- name: copy index7.html
+  copy:
+    src: /ansible/role/webservers/templates/index7.html.j2
+    dest: /var/www/html/index.html
+    owner: root
+    group: root
+    mode: '0666'
+
+#  - name: copy assets directory
+#    copy:
+#      src: /ansible/role/websers/templates/
+#      dest: /var/www/html/
+#      owner: root
+#      group: root

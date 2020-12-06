@@ -1,0 +1,21 @@
+---
+- name: start httpd
+  service:
+    name: httpd
+    state: started
+
+- name: httpd enabled and running
+  service:
+    name: httpd
+    enabled: true
+    state: restarted
+
+#- name: install selinux python bindings for cent6
+#  yum:
+#    name: libselinux-python
+#    state: latest
+
+- name: firewalls ruin everything
+  service:
+    name: iptables
+    state: stopped

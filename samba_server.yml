@@ -1,0 +1,8 @@
+---
+- name: Set up Samba server
+  hosts: prdx-samba201
+  remote_user: ansible  
+  become_method: sudo
+  become: yes
+  roles:
+  - samba

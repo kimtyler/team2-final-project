@@ -1,0 +1,65 @@
+---
+- name: Ensure Samba-related packages are installed (RedHat).
+  package: "name={{ item }} state=present"
+  with_items:
+    - samba
+    - samba-client
+    - samba-common
+    - cifs-utils
+    - perl
+    - libselinux-python
+    - policycoreutils-python
+
+- name: Ensure directories exist
+  file: 'path="{{ item.path_open }}" state=directory owner=root group=root mode=777'
+  with_items: "{{ samba_share_mounts }}"
+
+- name: Ensure directories exist
+  file: 'path="{{ item.path_secure }}" state=directory owner=root group=root mode=777'
+  with_items: "{{ samba_share_mounts }}"
+
+- name: Install Samba configuration file
+  template:
+    src: smb.conf.j2
+    dest: /etc/samba/smb.conf
+    owner: root
+    group: root
+    mode: 0644
+    setype: samba_etc_t
+
+#- name: Allow Samba to read and write to files labeled with the samba_share_t
+#  sefcontext:
+#    target: '/sambashare(/.*)?'
+#    setype: samba_share_t
+#    state: present
+
+
+- name: Create a sample file in /sambashare/open directory
+  shell: |
+    echo 'This is line one in sample file.
+    This is line two.
+    This is line three' > /sambashare/open/test_file
+
+- name: Create samba admin user
+  user:
+    name: "{{ item.username }}"
+    state: "{{ item.state | default(omit) }}"
+    remove: "{{ item.remove | default(omit) }}"
+    comment: "{{ item.comment | default(item.name) }}"
+    uid: "{{ item.uid | default(omit) }}"
+    password: "{{ item.password }}"
+    home: "{{ item.home | default(omit) }}"
+    shell: /bin/bash
+  with_items: "{{ samba_users }}"
+
+- name: Create samba account
+  shell: "(echo {{ item['smbpasswd'] }}; echo {{ item['smbpasswd'] }}) | smbpasswd -s -a {{ item['username'] }}"
+  become: true
+  with_items: "{{ samba_users }}"
+
+- name: Ensure smb is running and set to start on boot.
+  service: "name=smb state=started enabled=yes"
+
+- name: Ensure nmb is running and set to start on boot.cd
+  service: "name=nmb state=started enabled=yes"
+

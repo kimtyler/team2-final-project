@@ -1,0 +1,23 @@
+---
+- name: Install packages
+  yum:
+    name:
+      - bind
+      - bind-utils
+    state: latest
+
+- name: Configure dns slave1
+  template:
+    src: /ansible/role/dns-slave1/templates/named.conf.j2
+    dest: /etc/named.conf 
+
+- name: Restart named
+  service:
+    name: named
+    state: restarted
+
+- name: Configure resolv.conf for slave1
+  template:
+    src: /ansible/role/dns-slave1/templates/resolv.conf.j2
+    dest: /etc/named.conf
+  

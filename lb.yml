@@ -1,0 +1,39 @@
+---
+- name: use nameserver for lb role
+  hosts: nameserver
+  remote_user: ansible
+  become_method: sudo
+  become: yes
+
+- name: use lb6 role
+  hosts: prdx-lb261
+  remote_user: ansible
+  become_method: sudo
+  become: yes
+  roles:
+  - lb6
+
+- name: use lb7 role
+  hosts: prdx-lb271
+  remote_user: ansible
+  become_method: sudo
+  become: yes
+  roles:
+  - lb7
+
+- name: use lb6 role
+  hosts: prdx-db261
+  remote_user: ansible
+  become_method: sudo
+  become: yes
+  roles:
+  - lb6
+
+- name: use lb7 role
+  hosts: prdx-db271
+  remote_user: ansible
+  become_method: sudo
+  become: yes
+  roles:
+  - lb7
+

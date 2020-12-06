@@ -1,0 +1,30 @@
+---
+
+- name: Install packages for autofs
+  yum:
+    name: ['nfs-utils', 'autofs']
+    state: latest
+- name: Install packeges for ldap
+  yum:
+    name: ['openldap-clients', 'nss-pam-ldapd', 'authconfig']
+    state: latest
+- name: Congigure authconfig
+  shell: |
+    authconfig --enableldap --enableldapauth --ldapserver=prdx-ldap201.ziyotek2.local --ldapbasedn="dc=ziyotek2,dc=local" --enableldaptls --ldaploadcacert=http://prdx-ldap201/CA.crt --enablemkhomedir --update
+- name: Append auto.master file
+  template:
+    src: auto.master.j2
+    dest: /etc/auto.master
+- name: Copy auto.share file
+  template:
+    src: auto.share.j2
+    dest: /etc/auto.share
+- name: Copy auto.guest file
+  template:
+    src: auto.guest.j2
+    dest: /etc/auto.guest
+- name: Start and enable autofs
+  service:
+    name: autofs
+    state: started
+    enabled: true

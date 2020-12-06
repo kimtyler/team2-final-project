@@ -1,0 +1,33 @@
+---
+  - name: Start named
+    service:
+      name: named
+      state: restarted
+
+  - name: Firewall enable
+    service:
+      name: firewalld
+      state: enable
+
+  - name: Add TCP port
+    firewalld:
+      port: 53/tcp
+      state: enabled
+      permanent: true
+
+  - name: Add UDP port
+    firewalld:
+      port: 53/udp
+      state: enabled
+      permanent: true
+
+  - name: Firewall reload
+    service:
+      name: firewalld
+      state: reload
+
+  - name: Restart network
+    service:
+      name: network
+      state: restarted
+

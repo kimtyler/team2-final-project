@@ -1,0 +1,8 @@
+---
+- name: Install phpmyadim
+  hosts: data_server
+  user: ansible
+  become: yes
+
+  roles:
+  - role: geerlingguy.phpmyadmin

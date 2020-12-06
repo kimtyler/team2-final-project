@@ -1,0 +1,27 @@
+---
+
+- name: Install epel-release package
+  package:
+    name: epel-release
+    state: installed
+
+- name: Install phpmyadmin package
+  package:
+    name: phpmyadmin
+    state: installed
+
+- name: copy phpmyadmin.conf file
+  copy:
+    src: phpMyAdmin.conf.j2
+    dest: /etc/httpd/conf.d/phpMyAdmin.conf
+    mode: 0600
+    setype: httpd_config_t
+    owner: root
+    group: root
+  become: yes
+
+- name: Ensure httpd service is restarted
+  service:
+    name: httpd
+    state: restarted
+

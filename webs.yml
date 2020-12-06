@@ -1,0 +1,16 @@
+---
+- name: use web6 role playbook
+  hosts: web_six
+  user: ansible
+  become: true
+  roles:
+  - web6
+
+- name: use web7 role playbook
+  hosts: web_seven:prdx-db271
+  user: ansible
+  become: true
+  roles:
+  - web7
+
+

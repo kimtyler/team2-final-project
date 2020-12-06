@@ -1,0 +1,55 @@
+$TTL 1D
+@       IN SOA  prdx-nsm201.ziyotek2.local. root.prdx-nsm201.ziyotek2.local. (
+                                        20200524        ; serial
+                                        1D      ; refresh
+                                        1H      ; retry
+                                        1W      ; expire
+                                        3H )    ; minimum
+
+; name servers NS records
+                IN      NS      prdx-nsm201.ziyotek2.local.
+                IN      NS      prdx-nsw201.ziyotek2.local.
+                IN      NS      prdx-nsw202.ziyotek2.local.
+
+
+; name servers A records
+
+prdx-nsm201.ziyotek2.local.   IN      A       192.168.36.13
+prdx-nsw201.ziyotek2.local.   IN      A       192.168.36.14
+prdx-nsw202.ziyotek2.local.   IN      A       192.168.36.15
+; servers
+prdx-ntp201             IN      A       192.168.36.11
+prdx-ntp202             IN      A       192.168.36.12
+prdx-nsm201             IN      A       192.168.36.13
+prdx-nsw201             IN      A       192.168.36.14
+prdx-nsw202             IN      A       192.168.36.15
+prdx-pxe201             IN      A       192.168.36.16
+prdx-ftp201             IN      A       192.168.36.17
+prdx-nfs201             IN      A       192.168.36.18
+prdx-samba201           IN      A       192.168.36.19
+prdx-mail201            IN      A       192.168.36.20
+prdx-db261              IN      A       192.168.36.21
+prdx-db271              IN      A       192.168.36.22
+prdx-web261             IN      A       192.168.36.23
+prdx-web271             IN      A       192.168.36.24
+prdx-web262             IN      A       192.168.36.25
+prdx-web272             IN      A       192.168.36.26
+prdx-web263             IN      A       192.168.36.27
+prdx-web273             IN      A       192.168.36.28
+prdx-lb261              IN      A       192.168.36.29
+prdx-lb271              IN      A       192.168.36.30
+prdx-nagios201          IN      A       192.168.36.31
+prdx-ldap201            IN      A       192.168.36.32
+prdx-ansible201         IN      A       192.168.36.33
+prdx-wiki201            IN      A       192.168.36.34
+prdx-web291             IN      A       192.168.36.35
+prdx-web292             IN      A       192.168.36.36
+prdx-lb291              IN      A       192.168.36.37
+prdx-dockm201           IN      A       192.168.36.38
+prdx-dockw201           IN      A       192.168.36.39
+prdx-dockw202           IN      A       192.168.36.40
+prdx-jenkins201         IN      A       192.168.36.41
+prdx-kubem201           IN      A       192.168.36.42
+prdx-kubew201           IN      A       192.168.36.43
+prdx-kubew202           IN      A       192.168.36.44
+

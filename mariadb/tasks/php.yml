@@ -1,0 +1,17 @@
+---
+
+- name: Install packages
+  package:
+    name: php,php-mysql
+    state: installed
+
+- name: Create sample test.php file in Apache document root folder
+  shell: |
+    echo '<?php
+    // Show all information, defaults to INFO_ALL
+    phpinfo();
+    ?>' > /var/www/html/test.php
+- name: Ensure httpd service is restarted
+  service:
+    name: httpd
+    state: restarted

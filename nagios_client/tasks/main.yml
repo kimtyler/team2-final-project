@@ -1,0 +1,21 @@
+---
+- name: Install epel-release packages
+  yum:
+    name: epel-release
+    state: latest
+
+- name: Install nrpe packages
+  yum:
+    name: nrpe 
+    state: latest
+
+- name: Install nagios-plugins packages
+  yum:
+    name: nagios-plugins-all
+    state: latest 
+
+- name: Configure nrpe file
+  template:
+    src: nrpe.cfg.j2
+    dest: /etc/nagios/nrpe.cfg
+

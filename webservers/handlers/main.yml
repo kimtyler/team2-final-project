@@ -1,0 +1,18 @@
+---
+- name: start httpd
+  service: 
+    name: httpd
+    state: started
+
+- name: httpd enabled and running
+  service:
+    name: httpd
+    enabled: true
+    state: restarted
+
+- name: firewalld permits httpd service
+  firewalld:
+    port: 80
+    permanent: true
+    state: enabled
+    immediate: true

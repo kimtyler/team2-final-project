@@ -1,0 +1,46 @@
+---
+# defaults file for mariadb
+# Added list of databases to be created
+mariadb_databases:
+  - name: teamdb
+    init_script: init_teams.sql
+  - name: team_membersdb
+    init_script: init_team_members.sql
+mariadb_root_password: 'password'
+
+###Below entries were not touched
+mariadb_users: []
+
+mariadb_mirror: yum.mariadb.org
+mariadb_version: '10.5.5'
+
+mariadb_auth_unix_plugin: false
+
+# 27 is default in /usr/share/doc/setup-*/uidgid
+mariadb_system_user:
+  name: 'mysql'
+  uid: 27
+  gid: 27
+  shell: '/sbin/nologin'
+  home: '/var/lib/mysql'
+  comment: 'MySQL Server'
+
+mariadb_service: mariadb
+
+mariadb_bind_address: '0.0.0.0'
+mariadb_server_cnf:
+  general-log:
+  general-log-file: 'queries.log'
+  slow-query-log:
+  slow-query-log-file: 'mariadb-slow.log'
+  long-query-time: '5.0'
+mariadb_custom_cnf:
+  mariadb:
+    autoset_open_files_limit:
+    max-connections: '20'
+mariadb_configure_swappiness: true
+mariadb_swappiness: '10'
+
+mariadb_logrotate:
+  configure: true
+  rotate: 3

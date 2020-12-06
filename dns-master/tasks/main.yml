@@ -1,0 +1,41 @@
+---
+- name: Add multiple repositories
+  yum_repository:
+    name: epel
+    description: EPEL YUM repo
+    file: external_repos
+    baseurl: http://mirror.centos.org/centos/7/os/x86_64/
+    gpgcheck: no
+
+- name: install dns package
+  yum:
+    name:
+      - bind
+      - bind-utils
+    state: latest
+
+- name: configure named file
+  template:
+    src: /ansible/role/dns-master/templates/named.conf.j2
+    dest: /etc/named.conf
+
+- name: configured forward zone
+  template:
+    src: /ansible/role/dns-master/templates/ziyotek2.flz.j2
+    dest: /var/named/ziyotek2.flz
+
+- name: configured reverse zone
+  template:
+    src: /ansible/role/dns-master/templates/ziyotek2.rlz.j2
+    dest: /var/named/ziyotek2.rlz
+
+- name: configure network interface config file
+  template:
+    src: /ansible/role/dns-master/templates/ifcfg-ens192.j2
+    dest: /etc/sysconfig/network-scripts/ifcfg-enp0s3
+
+- name: configure resolv file
+  template:
+    src: /ansible/role/dns-master/templates/resolv.conf.j2
+    dest: /etc/resolv.conf
+

@@ -1,0 +1,26 @@
+---
+- name: Ensure Samba-client related packages are installed.
+  package: "name={{ item }} state=present"
+  with_items:
+    - samba-client
+    - cifs-utils
+    - perl
+
+- name: Ensure directories exist
+  file: 'path="{{ item.path }}" state=directory owner=root group=root mode=777'
+  with_items: "{{ samba_share_mounts }}"
+
+- name: Update fstab file
+  lineinfile:
+    path: /etc/fstab
+    regexp: '^{{ item.location }}'
+    line: "{{ samba_fstab }}"
+  with_items: "{{ samba_share_mounts }}"
+  notify: reload mount
+
+- name: Create a sample file in /client directory
+  shell: |
+    echo 'This is line one in sample file.
+    This is line two.
+    This is line three' > /client/sample_file
+

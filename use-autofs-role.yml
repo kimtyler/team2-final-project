@@ -1,0 +1,8 @@
+---
+
+- name: play autofs role
+  hosts: prdx-ansible201
+  become: yes
+  remote_user: ansible
+  roles:
+    - autofs

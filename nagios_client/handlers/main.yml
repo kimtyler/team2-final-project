@@ -1,0 +1,11 @@
+---
+- name: Start nrpe service
+  service:
+    name: nrpe
+    state: started
+    enabled: true
+
+- name: Restart Nagios service
+  service:
+    name: nagios.service
+    state: restarted

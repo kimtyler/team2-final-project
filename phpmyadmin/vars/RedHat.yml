@@ -1,0 +1,5 @@
+---
+__phpmyadmin_config_file: /etc/phpMyAdmin/config.inc.php
+__phpmyadmin_enablerepo: "epel"
+__phpmyadmin_enablerepo: "remi"
+
